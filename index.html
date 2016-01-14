@@ -81,6 +81,38 @@
 </div>
 </div>
 
+<div data-ng-app="MyApp">
+  <div data-ng-controller="MyController">
+    Imię:<br>
+    <input type="text" data-ng-model="Namer.name" /><br>
+    Nazwisko:<br>
+    <input type="text" data-ng-model="Namer.surname" /><br>
+    Email:<br>
+    <input type="email" data-ng-model="Namer.email" /><br>
+    Treść:<br>
+    <textarea data-ng-model="Namer.info"></textarea><br>
+    <input type="submit" data-ng-click="Send()" /><br><br>
+
+     <ul data-ng-repeat="one in names">
+      Imię:<br>
+      {{ one.first }}
+    </ul>
+    <ul data-ng-repeat="one in surnames">
+      Nazwisko:<br>
+      {{ one.second }}
+    </ul>
+    <ul data-ng-repeat="one in emails">
+      Email:<br>
+      {{ one.third }}
+    </ul>
+    <ul data-ng-repeat="one in infos">
+      Treść:<br>
+      {{ one.fourth }}
+    </ul>
+
+  </div>
+</div>
+
   <address>
   <strong><br><br>DRQ WEBSITE</strong><br>
   Ulica Sezamkowa 7<br>
