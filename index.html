@@ -18,52 +18,66 @@
   </head>
 
   <body ng-controller="someCtrl">
+    <section ng-controller="PanelController as panel">
     <div class="container">
-
      <h1>  
       <ul class="list-inline">
         <li>
           <img src="http://design.ubuntu.com/wp-content/uploads/ubuntu-logo14.png" class="img-rounded" width="280">
         </li>
-        <li>
-          <a href ng-click="tab = 1" class="btn btn-primary btn-lg active" role="button">FIRMA</a>
+        <li ng-class="{ active: panel.isSelected(1)}">
+          <a href ng-click="panel.selectTab(1)" class="btn btn-primary btn-lg active" role="button">FIRMA</a>
         </li>
-        <li>
-          <a href ng-click="tab = 2" class="btn btn-primary btn-lg active" role="button">PROJKETY</a>
+        <li ng-class="{ active: panel.isSelected(2)}">
+          <a href ng-click="panel.selectTab(2)" class="btn btn-primary btn-lg active" role="button">PROJKETY</a>
         </li>
-        <li>
-          <a href ng-click="tab = 3" class="btn btn-primary btn-lg active" role="button">PRODUKTY</a>
+        <li ng-class="{ active: panel.isSelected(3)}">
+          <a href ng-click="panel.selectTab(3)" class="btn btn-primary btn-lg active" role="button">PRODUKTY</a>
         </li>
       </ul>
     </h1>
-    <div class="row">
-       <div class="col-lg-8" ng-mode='tekst'>
-        <div ng-model="message">
-          {{ message }}
-        </div>
-      <br>Google Inc. została założona w 1998 roku przez dwóch doktorantów Uniwersytetu Stanforda, Amerykanina Larry'ego Page'a i Rosjanina Siergieja Brina. Opracowali oni nowatorską metodę analizy powiązań hipertekstowych – algorytm BackRub, potem przemianowany na PageRank – którą wykorzystali w swoim prototypie wyszukiwarki internetowej. Przedsiębiorstwo przetrwało załamanie rynku dot-comów i rozwijało się od tego czasu dzięki wsparciu prywatnych inwestorów; w roku 2004 spółka weszła na amerykańską giełdę, i od tej chwili doszło do znacznego przyspieszenia jej ekspansji, zakupu serwisów YouTube, Writely i przejęcia kilku innych mniejszych przedsiębiorstw.
+
+
+       <div class="row">
+       <div class="col-lg-8">
+
+    <div class="panel" ng-show="panel.isSelected(1)">
+      <h4> FIRMA </h4>
+      <p> {{ message }} </p>
     </div>
-     
+
+    <div class="panel" ng-show="panel.isSelected(2)">
+      <h4> PROJEKTY </h4>
+      <p> {{ message2 }} </p>
     </div>
-  <br><br>
-<div class="row">
-  
+
+    <div class="panel" ng-show="panel.isSelected(3)">
+      <h4> PRODUKTY </h4>
+      <p> {{ message3 }} </p>
+    </div>
+
+    </div></div>
+
+
+<div data ng-controller="defaultController">
+<div class="row"> 
   <div class="col-xs-2">
-
-     <form role="form">
-
-      <div class="form-group">
-          <label for="exampleInputName1">Podaj imie</label>
-          <input type="name" class="form-control input-sm" id="exampleInputName1" placeholder="Twoje imię">
-      </div>
-      <div class="form-group">
-          <label for="exampleInputEmail1">Email</label>
-          <input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="Podaj adres Email">
-      </div>
-      <label for="wiadomosc">Tekst:</label>
-      <textarea class="form-control input-sm" rows="3" placeholder="Treść wiadomości" id="wiadomosc"></textarea><br>
-      <button type="submit" class="btn btn-default">Wyślij!</button>
-      </form>
+     <form name ="ContactForm">
+      Imię: <br>
+      <input type="text" ng-model="contact.firstName" name="firstName" class="form-control" required />
+      Nazwisko: <br>
+      <input type="text" ng-model="contact.lastName" class="form-control" required />
+      Email: <br>
+      <input type="email" ng-model="contact.email" class="form-control" required />
+      Wiadomość: <br>
+      <textarea ng-model="contact.info" class="form-control" required></textarea>
+      <br>
+      <button class="btn btn-success" ng-click="update(contact)" ng-disabled="form.$invalid">Wyślij</button>
+     </form>
+     <br><br>
+     <pre> form = {{contact | json}} </pre>
+     <pre> contactForm = {{contactForm | json}} </pre>
+</div>
 </div>
 </div>
 
@@ -75,13 +89,15 @@
   </address>
 
 </div>
-    
+</section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js">
+    </script>
     <script src="controller.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/anuglarjs/1.4.0-beta.5/angular.js">
-    </script>
+    
   </body>
 </html>
